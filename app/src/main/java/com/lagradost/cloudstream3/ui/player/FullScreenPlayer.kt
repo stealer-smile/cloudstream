@@ -53,8 +53,8 @@ import com.lagradost.cloudstream3.databinding.SubtitleOffsetBinding
 import com.lagradost.cloudstream3.mvvm.logError
 import com.lagradost.cloudstream3.ui.player.GeneratorPlayer.Companion.subsProvidersIsActive
 import com.lagradost.cloudstream3.ui.player.source_priority.QualityDataHelper
-import com.lagradost.cloudstream3.ui.result.setText
-import com.lagradost.cloudstream3.ui.result.txt
+import com.lagradost.cloudstream3.utils.setText
+import com.lagradost.cloudstream3.utils.txt
 import com.lagradost.cloudstream3.ui.settings.Globals.EMULATOR
 import com.lagradost.cloudstream3.ui.settings.Globals.TV
 import com.lagradost.cloudstream3.ui.settings.Globals.isLayout
@@ -303,6 +303,7 @@ open class FullScreenPlayer : AbstractPlayerFragment() {
                 playerFfwdHolder.startAnimation(fadeAnimation)
                 playerRewHolder.startAnimation(fadeAnimation)
                 playerPausePlay.startAnimation(fadeAnimation)
+                downloadBothHeader.startAnimation(fadeAnimation)
 
                 /*if (isBuffering) {
                         player_pause_play?.isVisible = false
@@ -730,6 +731,7 @@ open class FullScreenPlayer : AbstractPlayerFragment() {
             playerPausePlay.startAnimation(fadeAnimation)
             playerFfwdHolder.startAnimation(fadeAnimation)
             playerRewHolder.startAnimation(fadeAnimation)
+            downloadBothHeader.startAnimation(fadeAnimation)
 
             //if (hasEpisodes)
             //    player_episodes_button?.startAnimation(fadeAnimation)
@@ -1311,7 +1313,7 @@ open class FullScreenPlayer : AbstractPlayerFragment() {
         // if nothing has loaded these buttons should not be visible
         playerBinding?.apply {
             playerSkipEpisode.isVisible = false
-            playerGoForward.isVisible = false
+            playerGoForwardRoot.isVisible = false
             playerTracksBtt.isVisible = false
             playerSkipOp.isVisible = false
             shadowOverlay.isVisible = false
@@ -1520,7 +1522,8 @@ open class FullScreenPlayer : AbstractPlayerFragment() {
                 mapOf(
                     playerGoBack to playerGoBackText,
                     playerRestart to playerRestartText,
-                    playerGoForward to playerGoForwardText
+                    playerGoForward to playerGoForwardText,
+                    downloadHeaderToggle to downloadHeaderToggleText,
                 ).forEach { (button, text) ->
                     button.setOnFocusChangeListener { _, hasFocus ->
                         if (!hasFocus) {
