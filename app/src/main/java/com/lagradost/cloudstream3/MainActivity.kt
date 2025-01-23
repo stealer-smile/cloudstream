@@ -356,7 +356,7 @@ class MainActivity : AppCompatActivity(), ColorPickerDialogListener, BiometricCa
                             synchronized(apis) {
                                 for (api in apis) {
                                     if (str.startsWith(api.mainUrl)) {
-                                        loadResult(str, api.name)
+                                        loadResult(str, api.name, "")
                                         return true
                                     }
                                 }
@@ -1537,13 +1537,13 @@ class MainActivity : AppCompatActivity(), ColorPickerDialogListener, BiometricCa
             }
 
             if (navDestination.matchDestination(R.id.navigation_home)) {
-                attachBackPressedCallback {
+                attachBackPressedCallback("MainActivity") {
                     showConfirmExitDialog(settingsManager)
                     window?.navigationBarColor =
                         colorFromAttribute(R.attr.primaryGrayBackground)
                     updateLocale()
                 }
-            } else detachBackPressedCallback()
+            } else detachBackPressedCallback("MainActivity")
         }
 
         //val navController = findNavController(R.id.nav_host_fragment)

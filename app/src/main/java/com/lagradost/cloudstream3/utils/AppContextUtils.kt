@@ -105,7 +105,7 @@ object AppContextUtils {
         this?.window?.setWindowAnimations(-1)
         this?.show()
         Handler(Looper.getMainLooper()).postDelayed({
-            this?.window?.setWindowAnimations(R.style.Animation_Design_BottomSheetDialog)
+            this?.window?.setWindowAnimations(com.google.android.material.R.style.Animation_Design_BottomSheetDialog)
         }, 200)
     }
 
@@ -756,15 +756,17 @@ object AppContextUtils {
     fun loadResult(
         url: String,
         apiName: String,
+        name : String,
         startAction: Int = 0,
         startValue: Int = 0
     ) {
-        (activity as FragmentActivity?)?.loadResult(url, apiName, startAction, startValue)
+        (activity as FragmentActivity?)?.loadResult(url, apiName, name, startAction, startValue)
     }
 
     fun FragmentActivity.loadResult(
         url: String,
         apiName: String,
+        name : String,
         startAction: Int = 0,
         startValue: Int = 0
     ) {
@@ -780,7 +782,7 @@ object AppContextUtils {
             // viewModelStore.clear()
             this.navigate(
                 getResultsId(),
-                ResultFragment.newInstance(url, apiName, startAction, startValue)
+                ResultFragment.newInstance(url, apiName, name, startAction, startValue)
             )
         }
     }
